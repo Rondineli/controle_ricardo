@@ -1,0 +1,34 @@
+{% extends "registration/base_login.html" %}
+{% load bootstrap3 %}
+{% load cache %}
+{% block corpo %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <form method="POST" class="form-signin">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-error">
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                E-mail e/ou senha inválido
+                        </div>
+                    </div>
+                {% endif %}
+                <div>
+                    <h2 class="heading">Efetue seu login</h2>
+                </div>
+                <div>
+                    <input type="text" class="form-control" name="username" placeholder="username">
+                    <input type="password" name="password" class="form-control" placeholder="pass">
+                    <font style="font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:bold;color:red;padding:17px"><b>{{ error }}</b></font>
+                </div>
+                <button class="btn btn-large btn-primary" id="submit" type="submit">Login</button>
+                </br>
+                <!-- <a href="/forgot_password/"><p class="pull-left">Esqueci minha senha</p></a>-->
+                <!-- <a href="/change_personal_mail/" onclick='document.forms["formLogin"].submit(); return false;'><p class="pull-left">Trocar Email Pessoal</p></a>-->
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

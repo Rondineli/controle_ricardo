@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link href="{{ STATIC_URL }}css/forms.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}assets/css/datepicker.css" type="text/css" media="all" rel="stylesheet" />
+
+        <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}js/js/jquery.js"></script>
+        <script src="{{ STATIC_URL }}js/bootbox.min.js"></script>
+        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        <script src="{{ STATIC_URL }}js/base.js"></script>
+
+        <script src="{{ STATIC_URL }}/date-time/moment-with-langs.min.js"></script>
+        <script src="{{ STATIC_URL }}/date-time/moment.js"></script>
+        <script src="{{ STATIC_URL }}js/bootstrap-datetimepicker.min.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/highcharts-3d.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+        {% block extra_js %}{% endblock %}
+        {% block cabecalho %}
+            <title> Controle Licenças (v1.0 - Beta)</title>
+        {% endblock %}
+    </head>
+    {% block body %}{% endblock %}
+</html>

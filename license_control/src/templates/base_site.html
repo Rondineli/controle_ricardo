@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block body %}
+<body>
+  <div class="navbar navbar-static-top">
+    <div class="collapse navbar-collapse navbar-inverse navHeaderCollapse">
+      <div class="container">
+        {% if page_name != 'consolidado' and page_name != 'faturas' and page_name != 'estatisticas'%}
+          <button class="btn btn-default" style="margin-top: 8px;" data-toggle="modal" data-target="#ModalCreateForm">
+            <i class="glyphicon glyphicon-plus"></i>
+          </button>
+        {% endif %}
+        <ul class="nav navbar-nav navbar-right">
+          <li id="menu_consolidado">
+            <a href="/" >Home
+            </a>
+          </li>
+          {% if user.is_superuser %}
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Conta
+              <span class="caret">
+              </span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="menu_logout"><a href="/logout/">Logout</a></li>
+              <li class="divider"></li>
+              <li class="menu_reset_senha"><a href="/admin/auth/user/{{ user.pk }}/password/">Resetar senha</a></li>
+              <li class="divider"></li>
+              <li class="menu_criar_user"><a href="/admin/auth/user/add/">Adicionar usuario</a></li>
+              <li class="divider"></li>
+              <li class="menu_edit_user"><a href="/admin/auth/user/{{ user.pk }}/">Editar usuario</a></li>
+              <li class="divider"></li>
+              <li class="menu_delete_user"><a href="/admin/auth/user/{{ user.pk }}/">Deletar usuario</a></li>
+            </ul> <!-- End Dropdown list -->
+          </li> <!-- End dropdown menu -->
+          {% endif %}
+        </ul> <!-- End menu configuration -->
+      </div>
+    </div>
+  </div>
+  <br></br>
+  <div class="container">
+    <div class="row">
+     {% bootstrap_messages %}
+      <div class="panel panel-default" style="position:relative;">
+        <div class="panel-heading">
+          <h3>{{ page_name |capfirst }}</h3> 
+          <span id="tablePanel"/>
+        </div>
+        <div class="panel-body">
+          {% block content_apps %}{% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% if page_name %}
+    <script type="text/javascript">
+        $("#menu_{{ page_name }}").addClass('active');
+    </script>
+{% endif %}
+</body>
+{% endblock %}
