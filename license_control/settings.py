@@ -37,8 +37,8 @@ DATABASES = {
         # Or path to database file if using sqlite3.
         'NAME': 'license_control_dev',
         # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
+        'USER': 'root',
+        'PASSWORD': 'rondigomes',
         # Empty for localhost through domain sockets or '127.0.0.1' for
         # localhost through TCP.
         'HOST': '',
@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     'license_control',
     'bootstrap3',
     'djcelery',
+    'filiais',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
