@@ -47,5 +47,6 @@ urlpatterns = patterns('',
     ),
 
     url(r'^', include('django.contrib.auth.urls')),
+    url(r'^filiais/', include('filiais.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

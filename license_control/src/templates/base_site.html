@@ -5,14 +5,19 @@
   <div class="navbar navbar-static-top">
     <div class="collapse navbar-collapse navbar-inverse navHeaderCollapse">
       <div class="container">
-        {% if page_name != 'consolidado' and page_name != 'faturas' and page_name != 'estatisticas'%}
-          <button class="btn btn-default" style="margin-top: 8px;" data-toggle="modal" data-target="#ModalCreateForm">
-            <i class="glyphicon glyphicon-plus"></i>
-          </button>
-        {% endif %}
+        <button class="btn btn-default" style="margin-top: 8px;" data-toggle="modal" data-target="#ModalCreateForm">
+          <i class="glyphicon glyphicon-plus"></i>Cadastrar Licença
+        </button>
+        <button class="btn btn-default" style="margin-top: 8px;" data-toggle="modal" data-target="#ModalCreateBranchForm">
+          <i class="glyphicon glyphicon-plus"></i>Cadastrar Filial
+        </button>
         <ul class="nav navbar-nav navbar-right">
           <li id="menu_consolidado">
             <a href="/" >Home
+            </a>
+          </li>
+          <li id="menu_consolidado">
+            <a href="/filiais" >Filiais
             </a>
           </li>
           {% if user.is_superuser %}

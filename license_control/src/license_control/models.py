@@ -19,6 +19,11 @@ class DatedModel(models.Model):
 
 
 class ControlLicense(DatedModel):
+    filial = models.ForeignKey(
+        'filiais.BranchLicense',
+        related_name=_(u'Filial'),
+        verbose_name=_(u'Filial a ser cadastraa')
+    )
     descricao = models.CharField(
         max_length=200,
         verbose_name=_(u'Descrição da licença'),

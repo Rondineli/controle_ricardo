@@ -3,48 +3,34 @@
 {% block content_apps %}
 <div class="col-xs-12 col-md-12">
     <div class="panel panel-danger">
-        <div class="panel-heading">Licenças com vencimento menores ou iguais a 30 dias
+        <div class="panel-heading">Filiais cadastradas
         </div>
     <div class="panel-body">
-        {% if objects_a_vencer %}
+        {% if object_list %}
         <table class="table" id="TableList">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Filial</th>
-                    <th>Descrição</th>
-                    <th>Orgaos renovaveis</th>
-                    <th>Data de emissão</th>
-                    <th>Data de vencimento</th>
-                    <th>Data de cadastro</th>
-                    <th>Data de alteracao</th>
-                    <th>Expirando?</th>
-                    <th>Ações</th>
+                    <th>Razão Social</th>
+                    <th>Estado</th>
+                    <th>CNPJ</th>
+                    <th>Data de criação</th>
+                    <th>Data de atualização</th>
                 </tr>
             </thead>
             <tbody>
-            {% for license in objects_a_vencer %}
+            {% for branch in object_list %}
                 <tr>
-                    <td>{{ license.id }}</td>
-                    <td>{{ license.filial }}</td>
-                    <td>{{ license.descricao }}</td>
-                    <td>{% if license.orgaos_renovaveis == 'e'%}Estadual{% elif license.orgaos_renovaveis == 'f'%}Federal{% else %}Municipal{% endif %}</td>
-                    <td>{{ license.date_emissao|date:"d/m/Y" }}</td>
-                    <td>{{ license.date_vencimento|date:"d/m/Y" }}</td>
-                    <td>{{ license.creation_time|date:"d/m/Y H:i" }}</td>
-                    <td>{{ license.modification_time|date:"d/m/Y H:i" }}</td>
+                    <td>{{ branch.id }}</td>
+                    <td>{{ branch.razao_social }}</td>
+                    <td>{{ branch.estado }}</td>
+                    <td>{{ branch.creation_time|date:"d/m/Y H:i" }}</td>
+                    <td>{{ branch.modification_time|date:"d/m/Y H:i" }}</td>
                     <td>
-                        {% if license.vencido %}
-                            <span style="color:green"class="glyphicon glyphicon-ok"></span>
-                        {% else %}
-                            <span style="color:red" class="glyphicon glyphicon-remove"></span>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <button class="btn btn-default" id="button-update-modal" onclick="GetUpdate({{license.id}})">
+                        <button class="btn btn-default" id="button-update-modal" onclick="GetUpdate({{branch.id}})">
                             <i class="glyphicon glyphicon-pencil"></i>
                         </button>
-                        <button class="btn btn-default" id="remove" onclick="PostRemove({{license.id}})">
+                        <button class="btn btn-default" id="remove" onclick="PostRemove({{branch.id}})">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
                     </td>
@@ -56,67 +42,7 @@
     </div> 
 </div>
 </div>
-<div class="col-xs-12 col-md-12">
-    <div class="panel panel-default">
-        <div class="panel-heading">Todos as licenças</div>
-    <div class="panel-body">
-    {% if object_list %}
-        <table class="table" id="TableList">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Filial</th>
-                    <th>Descrição</th>
-                    <th>Orgaos renovaveis</th>
-                    <th>Data de emissão</th>
-                    <th>Data de vencimento</th>
-                    <th>Data de cadastro</th>
-                    <th>Data de alteracao</th>
-                    <th>Expirando?</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for license in object_list %}
-                <tr>
-                    <td>{{ license.id }}</td>
-                    <td>{{ license.filial }}</td>
-                    <td>{{ license.descricao }}</td>
-                    <td>{% if license.orgaos_renovaveis == 'e'%}Estadual{% elif license.orgaos_renovaveis == 'f'%}Federal{% else %}Municipal{% endif %}</td>
-                    <td>{{ license.date_emissao|date:"d/m/Y" }}</td>
-                    <td>{{ license.date_vencimento|date:"d/m/Y" }}</td>
-                    <td>{{ license.creation_time|date:"d/m/Y H:i" }}</td>
-                    <td>{{ license.modification_time|date:"d/m/Y H:i" }}</td>
-                    <td>
-                        {% if license.vencido %}
-                            <span style="color:green"class="glyphicon glyphicon-ok"></span>
-                        {% else %}
-                            <span style="color:red" class="glyphicon glyphicon-remove"></span>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <button class="btn btn-default" id="button-update-modal" onclick="GetUpdate({{license.id}})">
-                            <i class="glyphicon glyphicon-pencil"></i>
-                        </button>
-                        <button class="btn btn-default" id="remove" onclick="PostRemove({{license.id}})">
-                            <i class="glyphicon glyphicon-remove"></i>
-                        </button>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <button class="btn btn-default" data-toggle="modal" data-target="#ModalCreateForm">
-            <i class="glyphicon glyphicon-plus"></i>Cadastrar Licença
-        </button>
-        <button class="btn btn-default" data-toggle="modal" data-target="#ModalCreateBranchForm">
-            <i class="glyphicon glyphicon-plus"></i>Cadastrar Filial
-        </button>
-    {% endif %}
-    </div>
-</div>
-</div>
+
 <div class="modal fade" id="ModalCreateForm">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -126,7 +52,7 @@
                     <span class="sr-only">Close</span></button>
                     <h4 class="modal-title">Cadastro</h4>
             </div>
-            <form method="POST" role="form" enctype="multipart/form-data" action="/create/">
+            <form method="POST" role="form" enctype="multipart/form-data" action="/filiais/create/">
                 {% csrf_token %}
                     <div class="modal-body" id="FormCreate">
                     </div>
@@ -138,6 +64,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal Create Form-->
+
 
 <div class="modal fade" id="ModalCreateBranchForm">
     <div class="modal-dialog">
@@ -160,6 +87,8 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal Create Form-->
+
+
 
 <div class="modal fade" id="ModalUpdateForm">
     <div class="modal-dialog">
@@ -215,7 +144,7 @@ $('#ModalCreateForm').on('show.bs.modal', function(e){
 </script>
 <script type="text/javascript">
     function GetUpdate(id){
-        var url = "/update/"+ id + "/"
+        var url = "/filiais/update/"+ id + "/"
         $.get(url, function(data){
             $('#ModalUpdateFormBody').html(data);
             $('#id_date_vencimento').datetimepicker({
@@ -243,7 +172,7 @@ $('#ModalCreateForm').on('show.bs.modal', function(e){
 </script>
 <script type="text/javascript">
     function PostRemove(id){
-        var id = "/delete/"+ id + "/";
+        var id = "/filiais/delete/"+ id + "/";
         bootbox.confirm("Tem certeza que deseja remover este item?", function(result){
             if(result && result != null && result != undefined){
                 $('#remove_form').attr("action", id).submit()

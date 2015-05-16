@@ -129,3 +129,59 @@ class LicensingDeleteView(ViewPage, DeleteView):
     def get_success_url(self):
         messages.success(self.request, _(u'Licença removido com sucesso'))
         return super(LicensingDeleteView, self).get_success_url()
+
+"""
+Cadastro de filiais
+
+"""
+
+
+class BranchCreateView(ViewPage, CreateView):
+    PAGE_NAME = PAGE_NAME
+    model = ControlLicense
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        messages.success(
+            self.request,
+            _(u'Licença cadastrada com sucesso')
+        )
+        return super(BranchCreateView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request,
+            _(u'Erro ao cadastrar Licença: {}'.format(form.errors))
+        )
+        return HttpResponseRedirect(self.success_url)
+
+
+class BranchUpdateView(ViewPage, UpdateView):
+    PAGE_NAME = PAGE_NAME
+    model = ControlLicense
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        messages.success(
+            self.request,
+            _(u'Licença cadastrada com sucesso')
+        )
+        return super(BranchUpdateView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request,
+            _(u'Erro ao cadastrar Licença: {}'.format(form.errors))
+        )
+        return HttpResponseRedirect(self.success_url)
+
+
+class BranchDeleteView(ViewPage, DeleteView):
+    PAGE_NAME = PAGE_NAME
+    model = ControlLicense
+    http_method_names = ['post', ]
+    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        messages.success(self.request, _(u'Licença removido com sucesso'))
+        return super(BranchDeleteView, self).get_success_url()
