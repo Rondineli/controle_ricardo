@@ -33,16 +33,16 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # Or path to database file if using sqlite3.
-        'NAME': 'license_control_dev',
+        'NAME': '    d86pq0bfia6gdr',
         # The following settings are not used with sqlite3:
-        'USER': 'root',
-        'PASSWORD': 'rondigomes',
+        'USER': 'fspnyrecmneqyt',
+        'PASSWORD': 'zH6tCc9iOIhTy5XW2_9Q4MIyI7',
         # Empty for localhost through domain sockets or '127.0.0.1' for
         # localhost through TCP.
-        'HOST': '',
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': 'ec2-50-19-233-111.compute-1.amazonaws.com',
+        'PORT': '5432',                      # Set to empty string for default.
     }
 }
 
@@ -167,6 +167,12 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+
+MEDIA_URL = '/media/'
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "license_control.settings")
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static/')
+STATIC_URL = '/static/'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
